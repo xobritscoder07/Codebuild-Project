@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap-trial";
-import { ScrollToPlugin } from "gsap-trial/ScrollToPlugin";
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import SmoothScroll from "./SmoothScroll";

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import gsap from "gsap-trial";
+import gsap from "gsap";
 
 const capabilities = [
   ['Behavioral Baseline & Anomaly Detection', 'Continuously self-calibrating machine learning models establish enterprise norms.'],

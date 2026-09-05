@@ -1,8 +1,8 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import gsap from "gsap-trial";
-import { ScrollTrigger } from "gsap-trial/ScrollTrigger";
-import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 

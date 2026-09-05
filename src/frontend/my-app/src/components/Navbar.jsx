@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import gsap from "gsap-trial";
+import gsap from "gsap";
 import logo from "../assets/logo.png" ;
 
 const links = [
