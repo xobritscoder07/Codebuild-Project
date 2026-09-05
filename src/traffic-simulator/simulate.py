@@ -7,7 +7,7 @@ import random
 import time
 from datetime import datetime, timedelta
 
-API_URL = "http://localhost:5000/predict"
+API_URL = "https://codebuild-project.onrender.com/predict"
 
 def random_ip():
     return f"{random.randint(10,223)}.{random.randint(0,255)}.{random.randint(0,255)}.{random.randint(1,254)}"
