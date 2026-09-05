@@ -32,4 +32,8 @@ def create_app(config_class=Config):
     from agent.system_monitor import run_internal_monitor_loop
     threading.Thread(target=run_internal_monitor_loop, daemon=True).start()
 
+    # Internal traffic simulator (generates + scores synthetic flows, no local script needed)
+    from app.routes.prediction_routes import run_internal_traffic_simulator
+    threading.Thread(target=run_internal_traffic_simulator, daemon=True).start()
+
     return app
