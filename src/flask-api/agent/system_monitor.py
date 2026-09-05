@@ -160,3 +160,40 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def run_internal_monitor_loop():
+    """Runs inside the Flask app itself (no HTTP call), inserting telemetry directly into the DB."""
+    import json as _json
+    from app.database import get_db_connection
+
+    while True:
+        try:
+            telemetry = collect_system_status()
+            connection = get_db_connection()
+            connection.execute(
+                """
+                INSERT INTO system_status (
+                    timestamp, hostname, cpu_usage, memory_usage,
+                    disk_usage, process_count, network_connections, suspicious_processes
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    telemetry["timestamp"],
+                    telemetry["hostname"],
+                    telemetry["cpu_usage"],
+                    telemetry["memory_usage"],
+                    telemetry["disk_usage"],
+                    telemetry["process_count"],
+                    telemetry["network_connections"],
+                    _json.dumps(telemetry["suspicious_processes"]),
+                ),
+            )
+            connection.commit()
+            connection.close()
+            print(f"[OK] Internal monitor inserted telemetry for {telemetry['hostname']}")
+        except Exception as e:
+            print(f"[WARN] Internal monitor error: {e}")
+
+        time.sleep(SEND_INTERVAL_SECONDS)

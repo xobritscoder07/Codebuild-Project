@@ -27,4 +27,9 @@ def create_app(config_class=Config):
     app.register_blueprint(system_bp)
     start_background_monitor()
 
+    # Internal telemetry monitor (writes system_status directly, no HTTP hop)
+    import threading
+    from agent.system_monitor import run_internal_monitor_loop
+    threading.Thread(target=run_internal_monitor_loop, daemon=True).start()
+
     return app
