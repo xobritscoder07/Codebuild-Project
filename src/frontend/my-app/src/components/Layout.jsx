@@ -14,12 +14,17 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     let active = true;
-    api
-      .getHealth()
-      .then(() => active && setApiStatus("connected"))
-      .catch(() => active && setApiStatus("disconnected"));
+    const checkHealth = () => {
+      api
+        .getHealth()
+        .then(() => active && setApiStatus("connected"))
+        .catch(() => active && setApiStatus("disconnected"));
+    };
+    checkHealth();
+    const interval = setInterval(checkHealth, 5000);
     return () => {
       active = false;
+      clearInterval(interval);
     };
   }, []);
 
